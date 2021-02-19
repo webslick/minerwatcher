@@ -1,0 +1,14 @@
+{
+  "Server": {
+    "dbConfig": {
+      "production": {
+        "username": "ca08455_bd",
+        "password": "ca08455_bd",
+        "database": "ca08455_bd",
+        "host": "minerwatcher.ru",
+        "dialect": "mysql"
+      }
+    },
+    "port": 80
+  }
+}

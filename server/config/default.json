@@ -1,0 +1,14 @@
+{
+  "Server": {
+    "dbConfig":  {
+      "development":{
+        "username": "ca08455_bd",
+        "password": "ca08455_bd",
+        "database": "ca08455_bd",
+        "host": "vh310.timeweb.ru",
+        "dialect": "mysql"
+      }
+    },
+    "port": 4000
+  }
+}

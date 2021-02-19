@@ -1,0 +1,13 @@
+.titleUpdateInfo {
+  width: 150px;
+  font-weight: 600;
+  color: lightgray;
+  text-align: center;
+  font-size: small;
+  position: absolute;
+  top: 200px;
+  left: 27px;
+}
+
+
+
