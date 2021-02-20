@@ -10,7 +10,7 @@ infoRouter.get('/getAdmin',async (req,res) => {
     res.send(ress.dataValues)
   })
   .catch(error => {
-    res.status(error.statusCode).json({error:error.msg});
+   res.status(error.statusCode).json({error:error.msg});
   }) 
 });
 infoRouter.get('/getRigs',(req,res,next) => {

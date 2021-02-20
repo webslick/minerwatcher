@@ -20,9 +20,9 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node app.js",
     "client": "npm run start --prefix ../client",
-    "client:install": "npm install --prefix ../client",
+    "client:install": "npm i --prefix ../client",
     "client:build": "npm run build --prefix ../client",
-    "server": "nodemon --inspect app.js",
+    "server": "nodemon app.js",
     "dev": "cross-env NODE_ENV=development run-p server client"
   },
   "eslintConfig": {

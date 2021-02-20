@@ -3,7 +3,7 @@
     "dbConfig": {
       "production": {
         "username": "ca08455_bd",
-        "password": "ca08455_bd",
+        "password": "123",
         "database": "ca08455_bd",
         "host": "minerwatcher.ru",
         "dialect": "mysql"
