@@ -12,9 +12,42 @@ infoRouter.get('/getAdmin',async (req,res) => {
     res.send(ress.dataValues)
   })
   .catch(error => {
-    console.log('!!3',error)
-
-    // res.status(error.statusCode).json({error:error.msg});
+   res.status(error.statusCode).json({error:error.msg});
+  }) 
+});
+infoRouter.get('/getRigs',(req,res,next) => {
+  My_rigs.findAll()
+  .then(ress => {
+    if (!ress || ress === null || ress === "") return res.status(422).send({msg: "Not user in table"})
+    res.send(ress)
+  })
+  .catch(error => {
+    res.status(error.statusCode).json({error:error.msg});
+  }) 
+});
+infoRouter.get('/getTempRigs',(req,res,next) => {
+  Temp_rigs.findOne({where: req.query})
+  .then(ress => {
+    if (!ress || ress === null || ress === "") return res.status(422).send({msg: "Not user in table"})
+    res.send(ress.dataValues)
+  })
+  .catch(error => {
+    res.status(error.statusCode).json({error:error.msg});
+  }) 
+});
+infoRouter.put('/putRig',(req,res,next) => {
+  const idRig = req.query.id;
+  My_rigs.update(req.body, {
+    where: {
+      id: idRig,
+    }
+  })
+  .then(ress => {
+    if (!ress || ress === null || ress === "") return res.status(422).send({msg: "Not user in table"})
+  res.status(200).send({msg: "Update base succes"})
+  })
+  .catch(error => {
+    res.status(error.statusCode).json({error:error.msg});
   }) 
 });
 // infoRouter.get('/getRigs',(req,res,next) => {
