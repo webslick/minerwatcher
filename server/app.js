@@ -20,6 +20,7 @@ if (process.env.NODE_ENV === 'production') {
   console.log(process.env.NODE_ENV)
   app.use('/',express.static(path.join(__dirname,'client','build')))
   app.get('*',(req,res)=>{
+    console.log(path.resolve(__dirname,'client','build','index.html'),'!@!@!@!@')
     res.sendFile(path.resolve(__dirname,'client','build','index.html'))
   })
 }
@@ -29,5 +30,3 @@ const PORT = config.get('Server.port') || 80;
 app.listen(PORT,()=>{
     console.log(`Start server ${PORT} on port`);
 });
-
-//1

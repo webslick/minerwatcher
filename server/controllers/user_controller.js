@@ -2,9 +2,9 @@ const { Admin_users,My_rigs,Temp_rigs } = require('../models');
 const { validationResult } = require ('express-validator/check');
 const sendmail = require('sendmail')();
 
-
 const UserController = {
   getAdmin:(req,res,next) => {
+    console.log('REQEST ADMIN')
     Admin_users.findOne({where: req.query})
     .then(ress => {
       if (!ress || ress === null || ress === "") return res.status(422).send({msg: "Not user in table"})

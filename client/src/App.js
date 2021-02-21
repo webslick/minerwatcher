@@ -61,8 +61,8 @@ class App extends React.Component {
   async getActualDateBD() { // DONE!
     const { fetchGetUser,fetchGetRigs,fetchGetTempRigs } = this.props;
     await fetchGetRigs(`/api/getRigs?id=1`);
-    await fetchGetUser(`/api/getAdmin?id=1`);
-    await fetchGetTempRigs(`/api/getTempRigs?id=1`);
+    // await fetchGetUser(`/api/getAdmin?id=1`);
+    // await fetchGetTempRigs(`/api/getTempRigs?id=1`);
   }
   componentWillUnmount() {
     clearInterval(this.updateWindowApp);
