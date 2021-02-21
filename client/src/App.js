@@ -39,14 +39,14 @@ class App extends React.Component {
       sinhronicDataRig,
       putTempArr,
     } = this.props;
-    this.updateDBApp = setInterval(this.getActualDateBD,60000*10); // Запрашиваем базу данных каждые 3 мин
+    this.updateDBApp = setInterval(this.getActualDateBD,60000*10); // Запрашиваем базу данных каждые 10 мин
     this.processInterval = setInterval(()=>{
       putTempArr(
         proccesingArrTimeToCards(store.getState().rigs.newData.cardsInfoArr,store.getState().config.newData)
       );
       sinhronicDataTemp();
       sinhronicDataRig();
-    },60010*10); // обробатываем инфу
+    },60400*10); // обробатываем инфу
     
     this.getActualDateBD()
     .then(() => {
@@ -61,8 +61,8 @@ class App extends React.Component {
   async getActualDateBD() { // DONE!
     const { fetchGetUser,fetchGetRigs,fetchGetTempRigs } = this.props;
     await fetchGetRigs(`/api/getRigs?id=1`);
-    // await fetchGetUser(`/api/getAdmin?id=1`);
-    // await fetchGetTempRigs(`/api/getTempRigs?id=1`);
+    await fetchGetUser(`/api/getAdmin?id=1`);
+    await fetchGetTempRigs(`/api/getTempRigs?id=1`);
   }
   componentWillUnmount() {
     clearInterval(this.updateWindowApp);

@@ -32,7 +32,7 @@ const getRndInteger = (min,max) => {
 const generateRigs = () => {
   let ArrayRigs = [];
   let now = moment().format("YYYY-MM-DD HH:mm");
-  for (let i = 0; i < 160; i++) {
+  for (let i = 0; i < 3; i++) {
     ArrayRigs.push({
       name_rig: generationName(),
       token: generationHash(),
