@@ -41,11 +41,12 @@ const generateRigs = () => {
       // status: (getRndInteger(1,2) === 1) ? 'on' : 'off',
       temp_min: 60,
       temp_max: 75,
-      last_online: moment().subtract(1,'hours').format("YYYY-MM-DD HH:mm"),
-      online_time: moment().subtract(4,'minutes').format("YYYY-MM-DD HH:mm"),
-      last_offline: moment().subtract(1,'hours').subtract(getRndInteger(1,3),'minutes').format("YYYY-MM-DD HH:mm"),
+      last_online: moment().subtract(getRndInteger(1,6),'hours').subtract(getRndInteger(1,6),'day').format("YYYY-MM-DD HH:mm"),
+      online_time: moment().subtract(2,'minutes').format("YYYY-MM-DD HH:mm"),
+      last_offline: moment().subtract(4,'hours').subtract(getRndInteger(1,3),'minutes').format("YYYY-MM-DD HH:mm"),// туту сколько времени назад подключили к сети
       offline_time: moment().subtract(4,'minutes').format("YYYY-MM-DD HH:mm"),
-      last_update: moment().subtract(getRndInteger(4,8),'minutes').format("YYYY-MM-DD HH:mm"),
+      last_update: moment().subtract(4,'minutes').format("YYYY-MM-DD HH:mm"),
+      // last_update: moment().subtract(getRndInteger(4,8),'minutes').format("YYYY-MM-DD HH:mm"),
       temp_arr: [getRndInteger(60,75),getRndInteger(60,75),getRndInteger(60,75),getRndInteger(60,75),getRndInteger(60,75),getRndInteger(60,75)].toString(),
       createdAt: now,
       updatedAt: now
