@@ -3,9 +3,9 @@
     "dbConfig":  {
       "development":{
         "username": "ca08455_bd",
-        "password": "ca08455_bd",
+        "password": "123",
         "database": "ca08455_bd",
-        "host": "vh310.timeweb.ru",
+        "host": "441857-cq05174.tmweb.ru",
         "dialect": "mysql"
       }
     },
