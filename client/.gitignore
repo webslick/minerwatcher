@@ -1,9 +1,7 @@
 # Ignore the node_modules directory
-server/node_modules/
-client/node_modules/
-client/build/
-client/package-lock.json
-server/package-lock.json
+node_modules/
+build/
+package-lock.json
 
 # Ignore Logs
 logs

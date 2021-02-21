@@ -18,7 +18,6 @@ app.use(cors());
 app.use('/api',info_rout);
 
 if (process.env.NODE_ENV === 'production') {
-  console.log(path.join(__dirname,'..','client','build'))
   app.use('/',express.static(path.join(__dirname,'..','client','build')))
   app.get('*',(req,res)=>{
 	 res.sendFile(path.resolve(__dirname,'..','client','build','index.html'))
@@ -31,4 +30,3 @@ app.listen(PORT,()=>{
     console.log(`Start server ${PORT} on port`);
 });
 
-//1
