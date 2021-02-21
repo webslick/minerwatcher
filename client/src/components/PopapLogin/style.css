@@ -1,0 +1,116 @@
+
+.popap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #1f3663;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  z-index: 100;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.windowIn {
+  width: 25em;
+    height: 16em;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+.textpass{
+  width: 240px;
+  margin-bottom: 10px;
+  font-family: 'Open Sans', sans-serif;
+  text-decoration: none;
+  text-align: center;
+  color: grey;
+  user-select: none;
+}
+
+.forgotPass {
+  width: 170px;
+    height: 28px;
+    color: #2b6db1;
+    text-align: center;
+    margin-top: 40px;
+    margin-left: 180px;
+    font-size: 18px;
+    user-select: none;
+    cursor: pointer;
+    font-family: 'Open Sans', sans-serif;
+    text-decoration:none;
+}
+
+.forgotPass:hover {
+    color: #0f3861;
+    font-size: 19px;
+    font-weight: 600;
+}
+
+.buttonIn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+   height: 18px;
+     text-align: center;
+     font-weight: 600;
+     cursor: pointer;
+     user-select: none;
+     background-color:rgb(26, 170, 12);
+     padding:10px;
+     position:relative;
+     font-family: 'Open Sans', sans-serif;
+     font-size:14px;
+     text-decoration:none;
+     color:#fff;
+     box-shadow: inset 0px 1px 0px #b2f17f, 0px 6px 0px #3d6f0d;
+     border-radius: 5px;
+}
+
+.buttonInSend {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 50%;
+   height: 18px;
+     text-align: center;
+     font-weight: 600;
+     cursor: pointer;
+     user-select: none;
+     background-color:rgb(26, 170, 12);
+     padding:10px;
+     position:relative;
+     font-family: 'Open Sans', sans-serif;
+     font-size:14px;
+     text-decoration:none;
+     color:#fff;
+     box-shadow: inset 0px 1px 0px #b2f17f, 0px 6px 0px #3d6f0d;
+     border-radius: 5px;
+     margin-top: 25px;
+}
+.buttonIn:active {
+  top:7px;
+	box-shadow: inset 0px 1px 0px #b2f17f, inset 0px -1px 0px #3d6f0d;
+	color: #156785;
+	text-shadow: 0px 1px 1px rgba(255,255,255,0.3);
+	background: rgb(63, 148, 7);
+
+}
+
+input {
+  width: 70%;
+  height: 24px;
+}

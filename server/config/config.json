@@ -1,0 +1,9 @@
+{
+  "development": {
+    "username": "ca08455_bd",
+    "password": "wae2IeLa",
+    "database": "ca08455_bd",
+    "host": "441857-cq05174.tmweb.ru",
+    "dialect": "mysql"
+  }
+}
