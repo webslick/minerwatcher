@@ -23,6 +23,7 @@ infoRouter.get('/getAdmin',async (req,res) => {
     res.send(ress.dataValues)
   })
   .catch(error => {
+    if(error.original.code === 'ER_ACCESS_DENIED_ERROR') return res.status(422).send({msg: "ER_ACCESS_DENIED_ERROR"})
    res.status(error.statusCode).json({error:error.msg});
   }) 
 });
@@ -34,6 +35,8 @@ infoRouter.get('/getRigs',(req,res,next) => {
     res.send(ress)
   })
   .catch(error => {
+    console.log(error.original.code)
+    if(error.original.code === 'ER_ACCESS_DENIED_ERROR') return res.status(422).send({msg: "ER_ACCESS_DENIED_ERROR"})
     res.status(error.statusCode).json({error:error.msg});
   }) 
 });
@@ -45,6 +48,7 @@ infoRouter.get('/getTempRigs',(req,res,next) => {
     res.send(ress.dataValues)
   })
   .catch(error => {
+    if(error.original.code === 'ER_ACCESS_DENIED_ERROR') return res.status(422).send({msg: "ER_ACCESS_DENIED_ERROR"})
     res.status(error.statusCode).json({error:error.msg});
   }) 
 });
@@ -61,6 +65,7 @@ infoRouter.put('/putRig',(req,res,next) => {
   res.status(200).send({msg: "Update base succes"})
   })
   .catch(error => {
+    if(error.original.code === 'ER_ACCESS_DENIED_ERROR') return res.status(422).send({msg: "ER_ACCESS_DENIED_ERROR"})
     res.status(error.statusCode).json({error:error.msg});
   }) 
 });
