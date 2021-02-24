@@ -5,15 +5,21 @@ const infoRouter = Router()
 
 infoRouter.post('/sendMail',(req,res) => {
   const { formForgot } = req.body
-  sendmail({
-    from: `${formForgot}`,
-    // to: 'webdev170291@yandex.ru',
-    to: 'Spmain54@mail.ru',
-    subject: `Запрос на восстонавление пароля от <${formForgot}>`,
-    html: `Пользователь с ником ${formForgot.bold()} запрашивает пароль`,
-  }, function(err, reply) {
-    res.status(200).send({msg: "Email succes"})
-  })
+  if(formForgot !== undefined) {
+    sendmail({
+      from: `${formForgot}`,
+      // to: 'webdev170291@yandex.ru',
+      to: 'Spmain54@mail.ru',
+      subject: `Запрос на восстонавление пароля от <${formForgot}>`,
+      html: `Пользователь с ником ${formForgot.bold()} запрашивает пароль`,
+    }, function(err, reply) {
+      res.status(200).send({msg: "Email succes"})
+      
+    })
+  }else {
+    res.status(200).send({msg: "Sorry blank page :("})
+  }
+
 });
 
 infoRouter.get('/getAdmin',async (req,res) => {
@@ -23,6 +29,7 @@ infoRouter.get('/getAdmin',async (req,res) => {
     res.send(ress.dataValues)
   })
   .catch(error => {
+    if(error.original.code === 'ER_ACCESS_DENIED_ERROR') return res.status(422).send({msg: "ER_ACCESS_DENIED_ERROR"})
    res.status(error.statusCode).json({error:error.msg});
   }) 
 });
@@ -34,6 +41,8 @@ infoRouter.get('/getRigs',(req,res,next) => {
     res.send(ress)
   })
   .catch(error => {
+    console.log(error.original.code)
+    if(error.original.code === 'ER_ACCESS_DENIED_ERROR') return res.status(422).send({msg: "ER_ACCESS_DENIED_ERROR"})
     res.status(error.statusCode).json({error:error.msg});
   }) 
 });
@@ -45,6 +54,7 @@ infoRouter.get('/getTempRigs',(req,res,next) => {
     res.send(ress.dataValues)
   })
   .catch(error => {
+    if(error.original.code === 'ER_ACCESS_DENIED_ERROR') return res.status(422).send({msg: "ER_ACCESS_DENIED_ERROR"})
     res.status(error.statusCode).json({error:error.msg});
   }) 
 });
@@ -61,6 +71,7 @@ infoRouter.put('/putRig',(req,res,next) => {
   res.status(200).send({msg: "Update base succes"})
   })
   .catch(error => {
+    if(error.original.code === 'ER_ACCESS_DENIED_ERROR') return res.status(422).send({msg: "ER_ACCESS_DENIED_ERROR"})
     res.status(error.statusCode).json({error:error.msg});
   }) 
 });

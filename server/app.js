@@ -1,11 +1,12 @@
 const express = require('express');
+const { Router } = require('express');
 const cors = require('cors');
 const path = require('path');
 const config = require('config');
 const app = express();
 const info_rout = require('./routes/info.routes')
-
-
+const { serverGet,serwerWorker } = require('./services/serverupdater');
+let objData = {};
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.setHeader("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
@@ -16,17 +17,48 @@ app.use(function (req, res, next) {
 app.use(cors());
 
 app.use('/api',info_rout);
+app.use('/server',Router().get('/getdata',(req,res,next) => {
+  res.status(200).send(objData)
+}));
 
 if (process.env.NODE_ENV === 'production') {
   app.use('/',express.static(path.join(__dirname,'..','client','build')))
   app.get('*',(req,res)=>{
-	 res.sendFile(path.resolve(__dirname,'..','client','build','index.html'))
+    res.sendFile(path.resolve(__dirname,'..','client','build','index.html'))
   })
 }
 
 const PORT = config.get('Server.port') || 80;
 
 app.listen(PORT,()=>{
+    serverGet().then(res => {
+      objData = res;
+      serwerWorker(res).then((resWorker) => {
+        objData.rigs.map((item,i) => {
+          // item.temp_arr = resWorker.answer[i].temp_arr
+          item.last_update = resWorker.answer[i].last_update
+          item.online_time = resWorker.answer[i].online_time
+          item.last_offline = resWorker.answer[i].last_offline
+        })
+      })
+    })
+    
+    const interval = setInterval(() => {
+      console.log('Запрашиваю базу каждые 2 минуты');
+      serverGet().then(res => {
+        objData = res;
+        serwerWorker(res).then((resWorker) => {
+          objData.rigs.map((item,i) => {
+            // item.temp_arr = resWorker.answer[i].temp_arr
+            item.last_update = resWorker.answer[i].last_update
+            item.online_time = resWorker.answer[i].online_time
+            item.last_offline = resWorker.answer[i].last_offline
+          })
+        })
+      })
+    }, 59990*3); 
+
     console.log(`Start server ${PORT} on port`);
+    console.log(`process.env.NODE_ENV = ${process.env.NODE_ENV}`);
 });
 
