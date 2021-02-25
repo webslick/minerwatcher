@@ -43,7 +43,7 @@ class App extends React.Component {
       sinhronicDataInfo,
       putTempArr,
     } = this.props;
-    this.updateDBApp = setInterval(this.getActualDateBD,61050*10); // Запрашиваем базу данных каждые 10 мин
+    this.updateDBApp = setInterval(this.getActualDateBD,61050*2); // Запрашиваем базу данных каждые 10 мин
     // this.processInterval = setInterval(()=>{
     //   putTempArr(
         // proccesingArrTimeToCards(store.getState().rigs.newData.cardsInfoArr,store.getState().config.newData)
@@ -102,8 +102,9 @@ class App extends React.Component {
     const work = getWorkedRig(info.oldData.rigs);
     // const work = getWorkedRig(cardsInfoArr); //!
     // if (true) {
-    if (formLogin === info.oldData.login && formPassword === info.oldData.password) {
-    // if (formLogin === login && formPassword === password) {
+    // if (formLogin === info.oldData.login && formPassword === info.oldData.password) {
+      // console.log(formLogin,password)
+    if (formLogin === login && formPassword === password) {
       return (
         <div className="App">
           <HeaderMenu userName={info.oldData.login} onClick={(event) => {
@@ -148,7 +149,8 @@ class App extends React.Component {
     } else {
       return (
         <div className="App">
-          <PopapLogin onClick={(event) => {
+          <PopapLogin pass={password} log={login} put={(event)=>{putUser(event);}} 
+          onClick={(event) => {
             event.fogort ? putMail(event) : putUser(event);
           }} />
         </div>
