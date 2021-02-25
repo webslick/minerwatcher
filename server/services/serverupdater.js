@@ -128,15 +128,17 @@ const serwerWorker = async obj => {
           temp_arr: rigs[i].temp_arr.toString(),
           last_update: item.last_online, // последнее обновление было тогда когда карта была онлайн последний раз
           offline_time: NowBDformat, // офлайн карта находится в данный момент
-          last_online: item.last_offline, // последний раз карта была в сети когда она была офлайн
+          last_online: item.online_time, // последний раз карта была в сети когда она была офлайн
           
         }
       } else {
         answer = {
           temp_arr: rigs[i].temp_arr.toString(),
           last_update: NowBDformat,
+          // last_update: NowBDformat.subtract(getRndInteger(1,2),'minutes'),
           online_time: NowBDformat,
-          last_offline: item.last_online,
+          last_offline: item.online_time,
+          last_online: item.offline_time,
         }
       }
 
@@ -186,8 +188,6 @@ const serwerWorker = async obj => {
   //   }) 
   //   // await axios.put(`/api/putRig?id=${i+1}`, answer)
   // })
-
-
 }
 
 module.exports = { serverGet,serwerWorker }

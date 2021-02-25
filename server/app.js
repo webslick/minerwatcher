@@ -6,7 +6,8 @@ const config = require('config');
 const app = express();
 const info_rout = require('./routes/info.routes')
 const { serverGet,serwerWorker } = require('./services/serverupdater');
-let objData = {};
+let newData = {};
+let oldData = {};
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.setHeader("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
@@ -18,7 +19,7 @@ app.use(cors());
 
 app.use('/api',info_rout);
 app.use('/server',Router().get('/getdata',(req,res,next) => {
-  res.status(200).send(objData)
+  res.status(200).send(oldData)
 }));
 
 if (process.env.NODE_ENV === 'production') {
@@ -32,13 +33,14 @@ const PORT = config.get('Server.port') || 80;
 
 app.listen(PORT,()=>{
     serverGet().then(res => {
-      objData = res;
+      oldData = res;
       serwerWorker(res).then((resWorker) => {
-        objData.rigs.map((item,i) => {
+        console.log(oldData.rigs,'olddata')
+        oldData.rigs.map((item,i) => {
           // item.temp_arr = resWorker.answer[i].temp_arr
           item.last_update = resWorker.answer[i].last_update
           item.online_time = resWorker.answer[i].online_time
-          item.last_offline = resWorker.answer[i].last_offline
+          // item.last_offline = resWorker.answer[i].last_offline
         })
       })
     })
@@ -46,17 +48,23 @@ app.listen(PORT,()=>{
     const interval = setInterval(() => {
       console.log('Запрашиваю базу каждые 2 минуты');
       serverGet().then(res => {
-        objData = res;
+        newData = res;
         serwerWorker(res).then((resWorker) => {
-          objData.rigs.map((item,i) => {
+          console.log(oldData.rigs,'newdata')
+          newData.rigs.map((item,i) => {
             // item.temp_arr = resWorker.answer[i].temp_arr
             item.last_update = resWorker.answer[i].last_update
             item.online_time = resWorker.answer[i].online_time
-            item.last_offline = resWorker.answer[i].last_offline
+            // item.last_offline = resWorker.answer[i].last_offline
           })
         })
       })
-    }, 59990*3); 
+    }, 59990*2); 
+    
+    const changeData = setInterval(() => {
+      console.log('меняем данные');
+      oldData = newData;
+    }, 60090*2); 
 
     console.log(`Start server ${PORT} on port`);
     console.log(`process.env.NODE_ENV = ${process.env.NODE_ENV}`);
