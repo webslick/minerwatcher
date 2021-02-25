@@ -4,6 +4,7 @@ import ColorTable from '../ColorTable/index';
 import InfoCards from '../InfoCards/index';
 import StatusNetwork from '../StatusNetwork/index';
 import Moment from 'react-moment';
+import moment from 'moment';
 import { convertTimeBd, differentsTimeOff } from '../../helpers';
 import style from './style.css';
 
@@ -16,21 +17,22 @@ class ItemCard extends React.Component {
         arr_temp,
         login,
       } = this.props;
-      const objDiff = differentsTimeOff(convertTimeBd(fill.status === 'on' ? fill.last_online : fill.last_offline,fill.status === 'on' ? fill.online_time : fill.offline_time));
+      const objDiff = differentsTimeOff(fill.status === 'on' ? fill.last_online : fill.last_offline,fill.status === 'on' ? fill.online_time : fill.offline_time);
+      const objDiffAgo = differentsTimeOff(convertTimeBd(fill.last_update,moment(moment().format("YYYY-MM-DD HH:mm"))));
       const lock = images.lock;
       const mess = images.mess;
       return (
         <div className="itemWrapper" style={{backgroundColor: fill.status === 'on' ? '' : `rgb(241,241,241)`}}>
           <div className="rowItemRig">
             <div className="titleRig">{`${fill.name_rig}_${count}`}</div>
-            <div className="infoRig">token <img style={{ marginTop: '5px'}} src={lock} width={14} /> {fill.token}</div>
-            <div className="infoRig">owner <img style={{ marginTop: '5px'}} src={mess} width={14} /> {login}</div>
+            <div className="infoRig">token <img style={{ marginTop: '5px'}} src={lock} width={14} alt="" /> {fill.token}</div>
+            <div className="infoRig">owner <img style={{ marginTop: '5px'}} src={mess} width={14} alt="" /> {login}</div>
             <div className="wrapperVersion">
             <div className="table" style={{backgroundColor:'rgb(42,101,166)',userSelect: 'none'}}>Config ver: 2</div>
               <div style={{width: '10px', height: '10px'}} />
             <div className="table" style={{backgroundColor:'rgb(42,101,166)',userSelect: 'none'}}>Exe ver: 2</div>
             </div>
-            <InfoCards name={fill.nameCards} />
+            <InfoCards />
           </div>
           <div className="rowItemRig">
             <div className="onlineWrapper">
@@ -42,8 +44,15 @@ class ItemCard extends React.Component {
             </div>
             <div className="updateWrapper">
               <div className="titileUpdate">Last update: </div>
-              <Moment format="YYYY-MM-DD HH:mm" className="timeUpdate" date={convertTimeBd(fill.last_update)} />
-              <Moment className="timeUpdate" fromNow>{convertTimeBd(fill.last_update)}</Moment>
+              <div className="momentWrapper">
+                <div className="timeUpdate">{moment(convertTimeBd(fill.last_update)).format("YYYY-MM-DD HH:mm")}</div>
+                {/* <Moment format="YYYY-MM-DD HH:mm" className="timeUpdate" date={convertTimeBd(fill.last_update)} /> */}
+                <div style={{margin: "0px 5px"}} />
+                <div className="timeUpdate">{
+                `(${objDiffAgo.days !== 0 ? `${objDiffAgo.days} Days`:''} ${objDiffAgo.hours !== 0 ? `${objDiffAgo.hours} hours`:''} ${objDiffAgo.minutes} minutes ago )`
+                }</div>
+                {/* <Moment className="timeUpdate" fromNow>{convertTimeBd(fill.last_update)}</Moment> */}
+              </div>
             </div>
           </div>
           <div className="rowItemRig">

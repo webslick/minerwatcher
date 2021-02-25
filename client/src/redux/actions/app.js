@@ -33,6 +33,16 @@ export function appGetRigs(url) {
   }
 }
 
+export function appGetInfo(url) {
+  return async (dispatch) => {
+    const info = await axios.get(url);
+      if(info.status !== 200) {
+        throw new Error(info.statusText)
+      }
+      dispatch(appGetInfoSucces(info.data));
+  }
+}
+
 export function appGetConfig(url) {
   return async (dispatch) => {
     const config = await axios.get(url);
@@ -40,6 +50,13 @@ export function appGetConfig(url) {
         throw new Error(config.statusText)
       }
       dispatch(appGetConfigSucces(config.data));
+  }
+}
+
+export function appGetInfoSucces(info) {
+  return {
+    type: ActionTypes.APP_REQUEST_GET_INFO,
+    info
   }
 }
 
@@ -104,6 +121,12 @@ export function copyDataTemp() {
 export function copyDataRig() {
   return {
     type: ActionTypes.COPY_DATA_RIG,
+  }
+}
+
+export function copyDataInfo() {
+  return {
+    type: ActionTypes.COPY_DATA_INFO,
   }
 }
 

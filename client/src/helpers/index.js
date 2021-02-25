@@ -113,7 +113,7 @@ export const proccesingArrTimeToCards = (rigs,config,fun) => {
       offline_time = NowBDformat;
       answer = {
         temp_arr: rigs[i].temp_arr.toString(),
-        last_update,
+        last_update, // время запроса карте минус пару минут
         offline_time,
         last_online: moment(item.offline_time).subtract(getRndInteger(1,3),'minutes')
       }
@@ -123,7 +123,7 @@ export const proccesingArrTimeToCards = (rigs,config,fun) => {
         temp_arr: rigs[i].temp_arr.toString(),
         last_update,
         online_time: NowBDformat,
-        last_offline: moment(item.last_online).subtract(getRndInteger(1,3),'minutes')
+        last_offline: moment(item.last_online).subtract(getRndInteger(2,5),'minutes')
       }
     }
     
