@@ -30,7 +30,6 @@ class PopapLogin extends React.Component {
     document.removeEventListener("keydown", this.escFunction, false);
   }
 
-
   handleInputChange(event) {
 
     const {
