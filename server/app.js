@@ -21,7 +21,7 @@ app.use('/api',info_rout);
 app.use('/server',Router().get('/getdata',(req,res,next) => {
   res.status(200).send(oldData)
 }));
-
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 if (process.env.NODE_ENV === 'production') {
   app.use('/',express.static(path.join(__dirname,'..','client','build')))
   app.get('*',(req,res)=>{
@@ -59,12 +59,11 @@ app.listen(PORT,()=>{
           })
         })
       })
-    }, 59990*2); 
+    }, 60000*2); 
     
     const changeData = setInterval(() => {
-      console.log('меняем данные');
       oldData = newData;
-    }, 60090*2); 
+    }, 61000*9); 
 
     console.log(`Start server ${PORT} on port`);
     console.log(`process.env.NODE_ENV = ${process.env.NODE_ENV}`);
