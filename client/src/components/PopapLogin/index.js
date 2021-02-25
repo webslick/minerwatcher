@@ -22,6 +22,7 @@ class PopapLogin extends React.Component {
       }
     } = event
    
+    
     this.setState({
       [name]: type === 'checkbox' ? checked : value
     });
