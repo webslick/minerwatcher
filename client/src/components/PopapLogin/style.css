@@ -38,6 +38,19 @@
   user-select: none;
 }
 
+.ErrorPass {
+  width: 170px;
+  height: 28px;
+  color: #ea572a;
+  text-align: center;
+  margin: 10px 10px;
+  font-size: 17px;
+  -webkit-user-select: none;
+  user-select: none;
+  font-family: 'Open Sans', sans-serif;
+  text-decoration: none;
+}
+
 .forgotPass {
   width: 170px;
     height: 28px;
