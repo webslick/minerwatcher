@@ -139,7 +139,6 @@ export function copyDataUser(user) {
 
 export function writeDataTemp(url,data) {
   return async (dispatch) => {
-    console.log('!^*%$@%!$#@$&#$@')
     const config = await axios.post(url, data)
     .then(function (response) {
       console.log(response);

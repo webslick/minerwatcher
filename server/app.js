@@ -35,7 +35,6 @@ app.listen(PORT,()=>{
     serverGet().then(res => {
       oldData = res;
       serwerWorker(res).then((resWorker) => {
-        console.log(oldData.rigs,'olddata')
         oldData.rigs.map((item,i) => {
           // item.temp_arr = resWorker.answer[i].temp_arr
           item.last_update = resWorker.answer[i].last_update
@@ -50,7 +49,6 @@ app.listen(PORT,()=>{
       serverGet().then(res => {
         newData = res;
         serwerWorker(res).then((resWorker) => {
-          console.log(oldData.rigs,'newdata')
           newData.rigs.map((item,i) => {
             // item.temp_arr = resWorker.answer[i].temp_arr
             item.last_update = resWorker.answer[i].last_update

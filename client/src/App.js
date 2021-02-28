@@ -102,9 +102,8 @@ class App extends React.Component {
     const work = getWorkedRig(info.oldData.rigs);
     // const work = getWorkedRig(cardsInfoArr); //!
     // if (true) {
-    // if (formLogin === info.oldData.login && formPassword === info.oldData.password) {
-      // console.log(formLogin,password)
-    if (formLogin === login && formPassword === password) {
+    if (formLogin === info.oldData.login && formPassword === info.oldData.password) {
+    // if (formLogin === login && formPassword === password) {
       return (
         <div className="App">
           <HeaderMenu userName={info.oldData.login} onClick={(event) => {
