@@ -41,7 +41,6 @@ infoRouter.get('/getRigs',(req,res,next) => {
     res.send(ress)
   })
   .catch(error => {
-    console.log(error.original.code)
     if(error.original.code === 'ER_ACCESS_DENIED_ERROR') return res.status(422).send({msg: "ER_ACCESS_DENIED_ERROR"})
     res.status(error.statusCode).json({error:error.msg});
   }) 

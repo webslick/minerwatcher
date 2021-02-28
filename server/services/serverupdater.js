@@ -163,7 +163,6 @@ const serwerWorker = async obj => {
     return objResult;
   }
 
-  // console.log()
   // rigs.map(async (item,i) => {
   //   My_rigs.update(req.body, {
   //     where: {
