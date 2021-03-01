@@ -3,8 +3,8 @@ import ActionTypes from '../constants';
 const initialState = {
   formLogin: '',
   formPassword: '',
-  login: '1',
-  password: '1',
+  login: 'poqeib0q34pukbncxAEG5',
+  password: '1W791238FG4YVTREXSUKIN74XF47BCSJKQNUX7',
   email:'',
   forgot_msg:''
 };
