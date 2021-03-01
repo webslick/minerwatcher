@@ -24,7 +24,7 @@ class ItemCard extends React.Component {
       return (
         <div className="itemWrapper" style={{backgroundColor: fill.status === 'on' ? '' : `rgb(241,241,241)`}}>
           <div className="rowItemRig">
-            <div className="titleRig">{`${fill.name_rig}_${count}`}</div>
+            <div className="titleRig">{`${fill.name_rig}_${fill.id}`}</div>
             <div className="infoRig">token <img style={{ marginTop: '5px'}} src={lock} width={14} alt="" /> {fill.token}</div>
             <div className="infoRig">owner <img style={{ marginTop: '5px'}} src={mess} width={14} alt="" /> {login}</div>
             <div className="wrapperVersion">

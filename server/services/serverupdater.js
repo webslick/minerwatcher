@@ -1,8 +1,6 @@
 const { Admin_users,My_rigs,Temp_rigs } = require('../models');
 const moment = require('moment');
 
-
-
 const serverGet = async () => {
   let erraray = [];
   let objResult = {
@@ -17,7 +15,7 @@ const serverGet = async () => {
       My_rigs.findAll(),
       Temp_rigs.findOne({where: { id: '1' }})
     ]);
-
+    console.log(results[1][0])
     results.map((item,i) => {
 
       if (!item || item === null || item === "" || item.length === 0) {
@@ -25,6 +23,7 @@ const serverGet = async () => {
       }
 
       if (Array.isArray(item)) {
+        
         item.map((elem) => {
           objResult.rigs.push({
             id: elem.dataValues.id,
@@ -69,39 +68,6 @@ const serverGet = async () => {
     return objResult;
   }
 }
-
-
-
-const getRndInteger = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1) ) + min;
-}
-
-const generationTempArr = (toggle,temp_min,temp_max) => {
-  let arr = [];
-  for(let i=0 ;i < 6; i++) {
-    arr.push(toggle ? getRndInteger(temp_min,temp_max) : getRndInteger(60,75))
-  }
-  return arr
-}
-
-const convertSeconds = (time) => {
-  const milliseconds = time%1000;
-  const seconds     = parseInt(time=time/1000)%60;
-  const minutes     = parseInt(time=time/60)%60;
-  const hours       = parseInt(time=time/60)%24;
-  const days        =  parseInt(time=time/24);
-  return {
-    seconds,
-    minutes,
-    hours,
-    days,
-  }
-}
-
-const differentsTimeOff = (now,last) => {
-  return convertSeconds(moment(last).diff(now));
-}
-
 const serwerWorker = async obj => {
   const { rigs } = obj;
   let answer = {}
@@ -128,7 +94,7 @@ const serwerWorker = async obj => {
           temp_arr: rigs[i].temp_arr.toString(),
           last_update: item.last_online, // последнее обновление было тогда когда карта была онлайн последний раз
           offline_time: NowBDformat, // офлайн карта находится в данный момент
-          last_online: item.online_time, // последний раз карта была в сети когда она была офлайн
+          // last_online: item.online_time, // последний раз карта была в сети когда она была офлайн
           
         }
       } else {
@@ -137,12 +103,13 @@ const serwerWorker = async obj => {
           last_update: NowBDformat,
           // last_update: NowBDformat.subtract(getRndInteger(1,2),'minutes'),
           online_time: NowBDformat,
-          last_offline: item.online_time,
-          last_online: item.offline_time,
+          // last_offline: item.online_time,
+          // last_online: item.offline_time,
         }
       }
 
-      let results =  My_rigs.update(answer, { where: {id: item.id} });
+      // let results =  My_rigs.update(answer, { where: {id: item.id} });
+      let results = [''];
       if ((results === null || results.length === 0) && results[0] === 0)  {
         erraray.push(`Произошла ошибка база не была перезаписана :(`);
       }
@@ -188,6 +155,39 @@ const serwerWorker = async obj => {
   //   // await axios.put(`/api/putRig?id=${i+1}`, answer)
   // })
 }
+
+
+const getRndInteger = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+
+const generationTempArr = (toggle,temp_min,temp_max) => {
+  let arr = [];
+  for(let i=0 ;i < 6; i++) {
+    arr.push(toggle ? getRndInteger(temp_min,temp_max) : getRndInteger(60,75))
+  }
+  return arr
+}
+
+const convertSeconds = (time) => {
+  const milliseconds = time%1000;
+  const seconds     = parseInt(time=time/1000)%60;
+  const minutes     = parseInt(time=time/60)%60;
+  const hours       = parseInt(time=time/60)%24;
+  const days        =  parseInt(time=time/24);
+  return {
+    seconds,
+    minutes,
+    hours,
+    days,
+  }
+}
+
+const differentsTimeOff = (now,last) => {
+  return convertSeconds(moment(last).diff(now));
+}
+
+
 
 module.exports = { serverGet,serwerWorker }
 

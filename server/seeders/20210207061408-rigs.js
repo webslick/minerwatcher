@@ -32,9 +32,8 @@ const getRndInteger = (min,max) => {
 const generateRigs = () => {
   let ArrayRigs = [];
   let now = moment().format("YYYY-MM-DD HH:mm");
-
-  for (let i = 0; i < 153; i++) {
-    let last_online = moment().subtract(getRndInteger(1,6),'hours').subtract(getRndInteger(1,6),'day').format("YYYY-MM-DD HH:mm")
+  for (let i = 0; i < 163; i++) {
+    let last_online = moment().subtract(getRndInteger(1,23),'hours').subtract(getRndInteger(1,50),'days').format("YYYY-MM-DD HH:mm")
     let last_offline = moment(last_online).subtract(getRndInteger(1,2),'minutes').format("YYYY-MM-DD HH:mm")
     ArrayRigs.push({
       name_rig: generationName(),
