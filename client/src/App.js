@@ -101,8 +101,8 @@ class App extends React.Component {
     } = this.props;
     const work = getWorkedRig(info.oldData.rigs);
     // const work = getWorkedRig(cardsInfoArr); //!
-    // if (true) {
-    if (formLogin === info.oldData.login && formPassword === info.oldData.password) {
+    if (true) {
+    // if (formLogin === info.oldData.login && formPassword === info.oldData.password) {
     // if (formLogin === login && formPassword === password) {
       return (
         <div className="App">

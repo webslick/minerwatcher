@@ -1,7 +1,7 @@
 import ActionTypes from '../constants';
 const initialState = {
 oldData: {
-  email_admin: "Spmain54@mail.ru",
+  email_admin: "minerwatcher@mail.ru",
   err: [],
   login: "admin1",
   password: "admin1",
