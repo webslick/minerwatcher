@@ -33,6 +33,7 @@ const generateRigs = () => {
   let ArrayRigs = [];
   let now = moment().format("YYYY-MM-DD HH:mm");
   for (let i = 0; i < 163; i++) {
+    // let last_online = moment().subtract(getRndInteger(1,23),'hours').format("YYYY-MM-DD HH:mm")
     let last_online = moment().subtract(getRndInteger(1,23),'hours').subtract(getRndInteger(1,50),'days').format("YYYY-MM-DD HH:mm")
     let last_offline = moment(last_online).subtract(getRndInteger(1,2),'minutes').format("YYYY-MM-DD HH:mm")
     ArrayRigs.push({
@@ -40,6 +41,8 @@ const generateRigs = () => {
       token: generationHash(),
       email: 'minerwatcher@com.ru',
       status:'on',
+      toogle_status_on: true,
+      toogle_status_off: false,
       // status: (getRndInteger(1,2) === 1) ? 'on' : 'off',
       temp_min: 60,
       temp_max: 75,

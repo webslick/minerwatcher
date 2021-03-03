@@ -43,7 +43,7 @@ class App extends React.Component {
       sinhronicDataInfo,
       putTempArr,
     } = this.props;
-    this.updateDBApp = setInterval(this.getActualDateBD,61050*2); // Запрашиваем базу данных каждые 10 мин
+    this.updateDBApp = setInterval(this.getActualDateBD,61050*10); // Запрашиваем базу данных каждые 10 мин
     // this.processInterval = setInterval(()=>{
     //   putTempArr(
         // proccesingArrTimeToCards(store.getState().rigs.newData.cardsInfoArr,store.getState().config.newData)

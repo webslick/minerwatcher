@@ -32,6 +32,7 @@ if (process.env.NODE_ENV === 'production') {
 const PORT = config.get('Server.port') || 80;
 
 app.listen(PORT,()=>{
+
     serverGet().then(res => {
       oldData = res;
       serwerWorker(res).then((resWorker) => {
@@ -57,11 +58,11 @@ app.listen(PORT,()=>{
           })
         })
       })
-    }, 60000*2); 
+    }, 60000*10); 
     
     const changeData = setInterval(() => {
       oldData = newData;
-    }, 61000*9); 
+    }, 61000*10); 
 
     console.log(`Start server ${PORT} on port`);
     console.log(`process.env.NODE_ENV = ${process.env.NODE_ENV}`);

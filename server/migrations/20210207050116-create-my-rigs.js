@@ -21,6 +21,12 @@ module.exports = {
       status: {
         type: Sequelize.STRING
       },
+      toogle_status_on: {
+        type: Sequelize.BOOLEAN
+      },
+      toogle_status_off: {
+        type: Sequelize.BOOLEAN
+      },
       temp_min: {
         type: Sequelize.INTEGER
       },

@@ -15,7 +15,6 @@ const serverGet = async () => {
       My_rigs.findAll(),
       Temp_rigs.findOne({where: { id: '1' }})
     ]);
-    console.log(results[1][0])
     results.map((item,i) => {
 
       if (!item || item === null || item === "" || item.length === 0) {
@@ -30,6 +29,8 @@ const serverGet = async () => {
             token: elem.dataValues.token,
             email: elem.dataValues.email,
             status: elem.dataValues.status,
+            toogle_status_on: elem.dataValues.toogle_status_on,
+            toogle_status_off: elem.dataValues.toogle_status_off,
             name_rig: elem.dataValues.name_rig,
             temp_min: elem.dataValues.temp_min,
             temp_max: elem.dataValues.temp_max,
@@ -72,14 +73,12 @@ const serwerWorker = async obj => {
   const { rigs } = obj;
   let answer = {}
   let erraray = [];
-  let hui = [];
   const NowBDformat = moment(moment().add(7, 'hours').format("YYYY-MM-DD HH:mm"));
   let objResult = {
     err: null,
     msg: null,
     answer: []
   };
-
   try {
     rigs.map(async(item,i) => {
 
@@ -89,27 +88,55 @@ const serwerWorker = async obj => {
         item.temp_arr = generationTempArr(obj.toogle_total_temp,item.temp_min,item.temp_max);
       }
 
-      if(item.status === 'off') {
+      if(item.status === 'on' && item.toogle_status_on) { 
         answer = {
           temp_arr: rigs[i].temp_arr.toString(),
-          last_update: item.last_online, // последнее обновление было тогда когда карта была онлайн последний раз
-          offline_time: NowBDformat, // офлайн карта находится в данный момент
-          // last_online: item.online_time, // последний раз карта была в сети когда она была офлайн
-          
-        }
-      } else {
-        answer = {
-          temp_arr: rigs[i].temp_arr.toString(),
+          online_time: NowBDformat,
+          toogle_status_off: 0,
           last_update: NowBDformat,
           // last_update: NowBDformat.subtract(getRndInteger(1,2),'minutes'),
-          online_time: NowBDformat,
           // last_offline: item.online_time,
           // last_online: item.offline_time,
         }
       }
+        
+      if(item.status === 'on' && item.toogle_status_on === false) {
+        answer = {
+          temp_arr: rigs[i].temp_arr.toString(),
+          last_update: NowBDformat,
+          online_time: NowBDformat,
+          last_online: NowBDformat,
+          toogle_status_off: 0,
+          toogle_status_on: 1,
+          // last_update: NowBDformat.subtract(getRndInteger(1,2),'minutes'),
+          // last_offline: item.online_time,
+        }
+      }
+     
+      if(item.status === 'off' && item.toogle_status_off) {
+        answer = {
+          temp_arr: rigs[i].temp_arr.toString(),
+          last_update: item.last_online, // последнее обновление было тогда когда карта была онлайн последний раз
+          offline_time: NowBDformat, // офлайн карта находится в данный момент
+          toogle_status_on: 0
+          // last_online: item.online_time, // последний раз карта была в сети когда она была офлайн
+        }
+      } 
 
-      // let results =  My_rigs.update(answer, { where: {id: item.id} });
-      let results = [''];
+      if(item.status === 'off' && item.toogle_status_off === false) {
+        answer = {
+          temp_arr: rigs[i].temp_arr.toString(),
+          last_update: NowBDformat, // последнее обновление было тогда когда карта была онлайн последний раз
+          offline_time: NowBDformat, // офлайн карта находится в данный момент
+          last_offline: NowBDformat,
+          last_online: NowBDformat, // последний раз карта была в сети когда она была офлайн
+          toogle_status_on: 0,
+          toogle_status_off: 1,
+        }
+      }
+
+      let results =  My_rigs.update(answer, { where: {id: item.id} });
+      // let results = [''];
       if ((results === null || results.length === 0) && results[0] === 0)  {
         erraray.push(`Произошла ошибка база не была перезаписана :(`);
       }

@@ -18,6 +18,8 @@ module.exports = (sequelize, DataTypes) => {
     token: DataTypes.STRING,
     email: DataTypes.STRING,
     status: DataTypes.STRING,
+    toogle_status_on: DataTypes.BOOLEAN,
+    toogle_status_off: DataTypes.BOOLEAN,
     temp_min: DataTypes.INTEGER,
     temp_max: DataTypes.INTEGER,
     last_online: DataTypes.DATE,

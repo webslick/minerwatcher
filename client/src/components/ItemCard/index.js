@@ -5,7 +5,7 @@ import InfoCards from '../InfoCards/index';
 import StatusNetwork from '../StatusNetwork/index';
 import Moment from 'react-moment';
 import moment from 'moment';
-import { convertTimeBd, differentsTimeOff } from '../../helpers';
+import { convertTimeBd, differentsTimeOff,getRndInteger } from '../../helpers';
 import style from './style.css';
 
 class ItemCard extends React.Component {
@@ -17,10 +17,33 @@ class ItemCard extends React.Component {
         arr_temp,
         login,
       } = this.props;
-      const objDiff = differentsTimeOff(fill.status === 'on' ? fill.last_online : fill.last_offline,fill.status === 'on' ? fill.online_time : fill.offline_time);
+
+      let objDiff = 0;
+
+      if (fill.status === 'on') {
+        if (fill.toogle_status_on === false) {
+          objDiff = differentsTimeOff(convertTimeBd(fill.last_update,moment(moment().format("YYYY-MM-DD HH:mm"))));
+        }
+        if (fill.toogle_status_on) {
+          objDiff = differentsTimeOff(moment(fill.last_online),fill.online_time);
+        }
+      }
+
+      if (fill.status === 'off') {
+        objDiff = differentsTimeOff(convertTimeBd(fill.last_update,moment(moment().format("YYYY-MM-DD HH:mm"))));
+        // if (fill.toogle_status_off === false) {
+        //   objDiff = differentsTimeOff(convertTimeBd(fill.last_update,moment(moment().format("YYYY-MM-DD HH:mm"))));
+        // }
+        // if (fill.toogle_status_off) {
+        //   objDiff = differentsTimeOff(convertTimeBd(fill.last_update,moment(moment().format("YYYY-MM-DD HH:mm"))));
+        // } 21-45=====21-38
+      }
+
       const objDiffAgo = differentsTimeOff(convertTimeBd(fill.last_update,moment(moment().format("YYYY-MM-DD HH:mm"))));
+      
       const lock = images.lock;
       const mess = images.mess;
+
       return (
         <div className="itemWrapper" style={{backgroundColor: fill.status === 'on' ? '' : `rgb(241,241,241)`}}>
           <div className="rowItemRig">
