@@ -21,12 +21,9 @@ class ItemCard extends React.Component {
       let objDiff = 0;
 
       if (fill.status === 'on') {
-        if (fill.toogle_status_on === false) {
-          objDiff = differentsTimeOff(convertTimeBd(fill.last_update,moment(moment().format("YYYY-MM-DD HH:mm"))));
-        }
-        if (fill.toogle_status_on) {
-          objDiff = differentsTimeOff(moment(fill.last_online),fill.online_time);
-        }
+       
+          objDiff = differentsTimeOff(moment(fill.offline_time),fill.online_time);
+      
       }
 
       if (fill.status === 'off') {
