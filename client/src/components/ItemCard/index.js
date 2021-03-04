@@ -39,8 +39,8 @@ class ItemCard extends React.Component {
         // } 21-45=====21-38
       }
 
-      const objDiffAgo = differentsTimeOff(convertTimeBd(fill.last_update,moment(moment().format("YYYY-MM-DD HH:mm"))));
-      
+      const objDiffAgo = differentsTimeOff(convertTimeBd(fill.last_update,moment().format("YYYY-MM-DD HH:mm")));
+
       const lock = images.lock;
       const mess = images.mess;
 

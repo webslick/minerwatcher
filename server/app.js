@@ -58,11 +58,11 @@ app.listen(PORT,()=>{
           })
         })
       })
-    }, 60000*10); 
+    }, 60000*2); 
     
     const changeData = setInterval(() => {
       oldData = newData;
-    }, 61000*10); 
+    }, 61000*2); 
 
     console.log(`Start server ${PORT} on port`);
     console.log(`process.env.NODE_ENV = ${process.env.NODE_ENV}`);
