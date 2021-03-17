@@ -52,7 +52,6 @@ class ItemCard extends React.Component {
               <div style={{width: '10px', height: '10px'}} />
             <div className="table" style={{backgroundColor:'rgb(42,101,166)',userSelect: 'none'}}>Exe ver: 2</div>
             </div>
-            <InfoCards />
           </div>
           <div className="rowItemRig">
             <div className="onlineWrapper">

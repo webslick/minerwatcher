@@ -9,7 +9,7 @@ function HeaderMenu(props) {
       <div className="headerWrapper">
         <div className="logo">Minerwatcher</div>
         <div className="borderLink">
-          <a download href="https://yadi.sk/d/WdoDXs5vTsAtHA" title="Download exe. file" className="linkDowload">Download Minerwatcher</a>
+          <a download href="https://disk.yandex.ru/d/ZU5gyNL5Zafeng" title="Download exe. file" className="linkDowload">Download Minerwatcher</a>
         </div>
         <img style={{position: 'absolute',top: '23px',left: '370px'}} src={qr} alt="profile" width="40" height="40" />
         <div className="profile">
