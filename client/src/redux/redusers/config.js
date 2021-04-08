@@ -4,7 +4,8 @@ const initialState = {
   oldData: {
     toogle_total_temp: "false",
     total_temp_max: 60,
-    total_temp_min: 75
+    total_temp_min: 75,
+    site_status_has_block: 'false',
   },
   newData: {}
 };
@@ -20,7 +21,8 @@ export default function config(state = initialState, action = {}) {
         newData: {
         toogle_total_temp: config.toogle_total_temp,
         total_temp_max: config.total_temp_max,
-        total_temp_min: config.total_temp_min
+        total_temp_min: config.total_temp_min,
+        site_status_has_block: config.site_status_has_block
         }
       };
     case ActionTypes.COPY_DATA_TEMP:

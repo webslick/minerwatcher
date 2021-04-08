@@ -52,7 +52,8 @@ oldData: {
   }],
     toogle_total_temp: "false",
     total_temp_max: 20,
-    total_temp_min: 10
+    total_temp_min: 10,
+    site_status_has_block: '5'
 },
 newData: {}
 };

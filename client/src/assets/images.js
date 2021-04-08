@@ -6,6 +6,7 @@ import profile from './images/profile.png';
 import lock from './images/lock.png';
 import mess from './images/mess.png';
 import qr from './images/qr.png';
+import danger from './images/danger.png';
 
 export default {
   cross,
@@ -15,5 +16,6 @@ export default {
   exit,
   mess,
   lock,
-  qr
+  qr,
+  danger
 }

@@ -53,6 +53,7 @@ const serverGet = async () => {
           objResult.toogle_total_temp = item.dataValues.toogle_total_temp,
           objResult.total_temp_min = item.dataValues.total_temp_min,
           objResult.total_temp_max = item.dataValues.total_temp_max
+          objResult.site_status_has_block = item.dataValues.site_status_has_block
         }
       }
     });

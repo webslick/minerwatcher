@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
   Temp_rigs.init({
     toogle_total_temp: DataTypes.STRING,
     total_temp_min: DataTypes.INTEGER,
-    total_temp_max: DataTypes.INTEGER
+    total_temp_max: DataTypes.INTEGER,
+    site_status_has_block: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Temp_rigs',

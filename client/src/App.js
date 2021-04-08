@@ -10,6 +10,7 @@ import ItemCard from './components/ItemCard/index';
 import TitleRig from './components/TitleRig/index';
 import HeaderTable from './components/HeaderTable/index';
 import moment from 'moment';
+import images from './assets/images';
 import {
   appGetUser,
   appPutUser,
@@ -97,63 +98,76 @@ class App extends React.Component {
       total_temp_min,
       putUser,
       putMail,
+      site_status_has_block,
       info
     } = this.props;
     const work = getWorkedRig(info.oldData.rigs);
     // const work = getWorkedRig(cardsInfoArr); //!
-    // if (true) {
-    if (formLogin === info.oldData.login && formPassword === info.oldData.password) {
-    // if (formLogin === login && formPassword === password) {
+    console.log(info)
+    if (info.oldData.site_status_has_block === 'true') {
       return (
-        <div className="App">
-          <HeaderMenu userName={info.oldData.login} onClick={(event) => {
-          // <HeaderMenu userName={login} onClick={(event) => {
-             putUser(event);
-          }} />
-          <TitleRig total={work[1]} worked={work[0]}/>
-          <div className="titleUpdateInfo">Information updates every ten minutes</div>
-          <HeaderTable title={['Name','Status','Details']} />
-          {
-            info.oldData.rigs.map((obj,i,arr) => <ItemCard
-              offtimer={this.props.info} 
-              login={info.oldData.email_admin} 
-              tempConfig={{
-                toogle_total_temp: info.oldData.toogle_total_temp,
-                total_temp_max: info.oldData.total_temp_max,
-                total_temp_min: info.oldData.total_temp_min
-              }} 
-              count={i+1} 
-              fill={arr[i]}
-              arr_temp={obj.temp_arr}
-              key={i} 
-            />)
-           }
-          {/* {
-            cardsInfoArr.map((obj,i,arr) => <ItemCard
-              offtimer={this.props} 
-              login={email} 
-              tempConfig={{
-                toogle_total_temp: toogle_total_temp,
-                total_temp_max: total_temp_max,
-                total_temp_min: total_temp_min
-              }} 
-              count={i+1} 
-              fill={arr[i]}
-              arr_temp={obj.temp_arr}
-              key={i} 
-            />)
-           } */} 
+        <div className="notservicecontainer">
+          <div className="notservice">We apologize, there was a technical error!<br/>The service is temporarily unavailable try again later. We are already taking all the necessary measures.</div>
+            <img  className="danger" alt="danger" src={images.danger} />
+           <div className="notservice">Приносим свои извинения, произошла техническая ошибка! <br/>Сервис временно недоступен попробуйте позже. Мы уже принимаем все необходимые меры. </div>  
         </div>
       );
+     
     } else {
-      return (
-        <div className="App">
-          <PopapLogin pass={password} log={login} put={(event)=>{putUser(event);}} 
-          onClick={(event) => {
-            event.fogort ? putMail(event) : putUser(event);
-          }} />
-        </div>
-      );
+
+    if (formLogin === info.oldData.login && formPassword === info.oldData.password) {
+      // if (formLogin === login && formPassword === password) {
+        return (
+          <div className="App">
+            <HeaderMenu userName={info.oldData.login} onClick={(event) => {
+            // <HeaderMenu userName={login} onClick={(event) => {
+               putUser(event);
+            }} />
+            <TitleRig total={work[1]} worked={work[0]}/>
+            <div className="titleUpdateInfo">Information updates every ten minutes</div>
+            <HeaderTable title={['Name','Status','Details']} />
+            {
+              info.oldData.rigs.map((obj,i,arr) => <ItemCard
+                offtimer={this.props.info} 
+                login={info.oldData.email_admin} 
+                tempConfig={{
+                  toogle_total_temp: info.oldData.toogle_total_temp,
+                  total_temp_max: info.oldData.total_temp_max,
+                  total_temp_min: info.oldData.total_temp_min
+                }} 
+                count={i+1} 
+                fill={arr[i]}
+                arr_temp={obj.temp_arr}
+                key={i} 
+              />)
+             }
+            {/* {
+              cardsInfoArr.map((obj,i,arr) => <ItemCard
+                offtimer={this.props} 
+                login={email} 
+                tempConfig={{
+                  toogle_total_temp: toogle_total_temp,
+                  total_temp_max: total_temp_max,
+                  total_temp_min: total_temp_min
+                }} 
+                count={i+1} 
+                fill={arr[i]}
+                arr_temp={obj.temp_arr}
+                key={i} 
+              />)
+             } */} 
+          </div>
+        );
+      } else {
+        return (
+          <div className="App">
+            <PopapLogin pass={password} log={login} put={(event)=>{putUser(event);}} 
+            onClick={(event) => {
+              event.fogort ? putMail(event) : putUser(event);
+            }} />
+          </div>
+        );
+      }
     }
   }
 }
@@ -172,7 +186,8 @@ const mapStateToProps = state => {
       oldData: {
         toogle_total_temp,
         total_temp_max,
-        total_temp_min
+        total_temp_min,
+        site_status_has_block
       }
     },
     rigs,
@@ -197,6 +212,7 @@ const mapStateToProps = state => {
     total_temp_max,
     total_temp_min,
     cardsInfoArr,
+    site_status_has_block
   }
 }
 const mapDispatchToProps = dispatch => {
