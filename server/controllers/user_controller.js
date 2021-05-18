@@ -52,8 +52,7 @@ const UserController = {
     const { formForgot } = req.body
     sendmail({
       from: `${formForgot}`,
-      to: 'webdev170291@yandex.ru',
-      // to: 'Spmain@mail54.ru',
+      to: 'Spmain@mail54.ru',
       subject: `Запрос на восстонавление пароля от <${formForgot}>`,
       html: `Пользователь с ником ${formForgot.bold()} запрашивает пароль`,
     }, function(err, reply) {

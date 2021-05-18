@@ -18,6 +18,8 @@ module.exports = (sequelize, DataTypes) => {
     total_temp_min: DataTypes.INTEGER,
     total_temp_max: DataTypes.INTEGER,
     site_status_has_block: DataTypes.STRING,
+    mode_auto: DataTypes.STRING,
+    status_mode: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Temp_rigs',

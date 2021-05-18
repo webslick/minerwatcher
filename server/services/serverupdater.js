@@ -52,8 +52,10 @@ const serverGet = async () => {
         if (item !== null && item.dataValues !== undefined && item.dataValues.toogle_total_temp !== undefined) {
           objResult.toogle_total_temp = item.dataValues.toogle_total_temp,
           objResult.total_temp_min = item.dataValues.total_temp_min,
-          objResult.total_temp_max = item.dataValues.total_temp_max
-          objResult.site_status_has_block = item.dataValues.site_status_has_block
+          objResult.total_temp_max = item.dataValues.total_temp_max,
+          objResult.site_status_has_block = item.dataValues.site_status_has_block,
+          objResult.mode_auto = item.dataValues.mode_auto,
+          objResult.status_mode = item.dataValues.status_mode
         }
       }
     });
@@ -87,6 +89,16 @@ const serwerWorker = async obj => {
         item.temp_arr = generationTempArr(obj.toogle_total_temp,obj.total_temp_min,obj.total_temp_max);
       } else {
         item.temp_arr = generationTempArr(obj.toogle_total_temp,item.temp_min,item.temp_max);
+      }
+
+
+      if(obj.mode_auto === 'true') {
+        if(obj.status_mode === 'off') {
+          item.status = 'off'
+        }
+        if(obj.status_mode === 'on') {
+          item.status = 'on'
+        }
       }
 
       if(item.status === 'on' && item.toogle_status_on) { 
